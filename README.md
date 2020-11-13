@@ -9,6 +9,10 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/york.course.excel.model.in.R)](https://CRAN.R-project.org/package=york.course.excel.model.in.R)
+[![Codecov test
+coverage](https://codecov.io/gh/n8thangreen/york.course.excel.model.in.R/branch/master/graph/badge.svg)](https://codecov.io/gh/n8thangreen/york.course.excel.model.in.R?branch=master)
+[![R build
+status](https://github.com/n8thangreen/york.course.excel.model.in.R/workflows/R-CMD-check/badge.svg)](https://github.com/n8thangreen/york.course.excel.model.in.R/actions)
 <!-- badges: end -->
 
 The goal of york.course.excel.model.in.R is to …
