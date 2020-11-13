@@ -32,31 +32,19 @@ You can install the released version of york.course.excel.model.in.R from [CRAN]
 install.packages("york.course.excel.model.in.R")
 ```
 
-## Example
+## Background
 
-This is a basic example which shows you how to solve a common problem:
+This is an R implementation of the Excel model titled
+_Markov Modelling and Probabilistic Sensitivity Analysis for Cost-Effectiveness Modelling of Health Care Interventions_
+by Andrew Briggs, Health Economics Research Centre, University of Oxford.
 
-```{r example}
-library(york.course.excel.model.in.R)
-## basic example code
-```
+The model outlined is the spreadsheet was used to illustrate the principles of Markov modelling and probabilistic sensitivity analysis in the following two papers:			
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+* Briggs A, Sculpher M.  Introducing Markov models for economic evaluation. PharmacoEconomics 1998; 13(4): 397-409.			
+* Briggs AH.  Handling uncertainty in cost-effectiveness models.PharmacoEconomics 2000 (forthcoming).			
 
-```{r cars}
-summary(cars)
-```
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
-
+The model is made available for non-commercial teaching purposes only.			
+				
 ## Code of Conduct
 
 Please note that the york.course.excel.model.in.R project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.

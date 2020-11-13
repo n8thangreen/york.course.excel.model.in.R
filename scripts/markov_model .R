@@ -14,7 +14,7 @@ s_names  <- c("Asymptomatic_disease", "Progressive_disease", "Dead")
 n_states <- 3 #length(s_names)
 
 # specify number of cycles
-n_cycles <- 5 #44
+n_cycles <- 44
 
 Initial_age <- 55
 
@@ -86,15 +86,15 @@ trans[, cycle = 1, "Dead"] <- 0
 
 # add up costs and QALYs for each cycle at a time for each drug
 
-cycle_costs <- array(NA,
-                     dim = c(n_treatments, n_cycles),
-                     dimnames = list(treatment = t_names,
-                                     cycle = NULL))
+cycle_empty_array <-
+  array(NA,
+        dim = c(n_treatments, n_cycles),
+        dimnames = list(treatment = t_names,
+                        cycle = NULL))
 
-cycle_QALYs <- array(NA,
-                     dim = c(n_treatments, n_cycles),
-                     dimnames = list(treatment = t_names,
-                                     cycle = NULL))
+cycle_state_costs <- cycle_trans_costs <- cycle_empty_array
+cycle_costs <- cycle_QALYs <- cycle_empty_array
+cycle_QALE <- cycle_empty_array
 
 total_costs <- setNames(c(NA, NA), t_names)
 total_QALYs <- setNames(c(NA, NA), t_names)
@@ -111,6 +111,9 @@ for (i in 1:n_treatments) {
     p_matrix <- p_matrix_cycle(p_matrix, age, j - 1)
 
     p_matrix_trans <- p_matrix[treatment = i, , ]
+
+    # no cost to death from asymptomatic
+    p_matrix_trans["Asymptomatic_disease", "Dead"] <- 0
     diag(p_matrix_trans) <- 0
 
     # matrix multiplication
@@ -123,16 +126,18 @@ for (i in 1:n_treatments) {
     age <- age + 1
   }
 
-  cycle_QALYs[i, ] <-
+  cycle_state_costs[i, ] <-
+    (pop[treatment = i, , ] %*% state_c_matrix[treatment = i, ]) * 1/(1 + cDr)^(1:n_cycles)
+
+  cycle_trans_costs[i, ] <-
+    (trans[treatment = i, , ] %*% trans_c_matrix[treatment = i, ]) * 1/(1 + cDr)^(1:n_cycles)
+
+  cycle_costs[i, ] <- cycle_state_costs[i, ] + cycle_trans_costs[i, ]
+
+  cycle_QALE[i, ] <-
     pop[treatment = i, , ] %*% state_q_matrix[treatment = i, ]
 
-  cycle_costs[i, ] <-
-    pop[treatment = i, , ] %*% state_c_matrix[treatment = i, ] +
-    trans[treatment = i, , ] %*% trans_c_matrix[treatment = i, ]
-
-  # discounted
-  cycle_QALYs[i, ] <- cycle_QALYs[i, ] * 1/(1 + oDr)^(1:n_cycles)
-  cycle_costs[i, ] <- cycle_costs[i, ] * 1/(1 + cDr)^(1:n_cycles)
+  cycle_QALYs[i, ] <- cycle_QALE[i, ] * 1/(1 + oDr)^(1:n_cycles)
 
   total_costs[i] <- sum(cycle_costs[treatment = i, ])
   total_QALYs[i] <- sum(cycle_QALYs[treatment = i, ])
@@ -150,7 +155,8 @@ ICER <- c_incr/q_incr
 
 
 plot(x = q_incr, y = c_incr,
-     xlim = c(0,20),
+     # xlim = c(0,30),
+     xlim = c(0,1100),
      ylim = c(0, 10e6),
      pch = 16, cex = 1.5,
      xlab = "QALY differential",

@@ -26,38 +26,23 @@ from [CRAN](https://CRAN.R-project.org) with:
 install.packages("york.course.excel.model.in.R")
 ```
 
-## Example
+## Background
 
-This is a basic example which shows you how to solve a common problem:
+This is an R implementation of the Excel model titled *Markov Modelling
+and Probabilistic Sensitivity Analysis for Cost-Effectiveness Modelling
+of Health Care Interventions* by Andrew Briggs, Health Economics
+Research Centre, University of Oxford.
 
-``` r
-library(york.course.excel.model.in.R)
-## basic example code
-```
+The model outlined is the spreadsheet was used to illustrate the
+principles of Markov modelling and probabilistic sensitivity analysis in
+the following two papers:
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+-   Briggs A, Sculpher M. Introducing Markov models for economic
+    evaluation. PharmacoEconomics 1998; 13(4): 397-409.  
+-   Briggs AH. Handling uncertainty in cost-effectiveness
+    models.PharmacoEconomics 2000 (forthcoming).
 
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub!
+The model is made available for non-commercial teaching purposes only.
 
 ## Code of Conduct
 

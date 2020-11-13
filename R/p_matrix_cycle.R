@@ -28,9 +28,11 @@ p_matrix_cycle <- function(p_matrix, age, cycle) {
   p_matrix["without_drug",
            "Asymptomatic_disease", "Asymptomatic_disease"] <- 1 - tpProg*cycle - tpDn
 
-  p_matrix["without_drug", "Progressive_disease", "Dead"] <- tpDcm + tpDn
+  p_matrix["without_drug",
+           "Progressive_disease", "Dead"] <- tpDcm + tpDn
 
-  p_matrix["without_drug", "Progressive_disease", "Progressive_disease"] <- 1 - tpDcm - tpDn
+  p_matrix["without_drug",
+           "Progressive_disease", "Progressive_disease"] <- 1 - tpDcm - tpDn
 
   p_matrix["without_drug", "Dead", "Dead"] <- 1
 
@@ -42,12 +44,15 @@ p_matrix_cycle <- function(p_matrix, age, cycle) {
   p_matrix["with_drug",
            "Asymptomatic_disease", "Dead"] <- tpDn
 
-  p_matrix["with_drug", "Asymptomatic_disease", "Asymptomatic_disease"] <-
+  p_matrix["with_drug",
+           "Asymptomatic_disease", "Asymptomatic_disease"] <-
     1 - tpProg*(1 - Effect)*cycle - tpDn
 
-  p_matrix["with_drug", "Progressive_disease", "Dead"] <- tpDcm + tpDn
+  p_matrix["with_drug",
+           "Progressive_disease", "Dead"] <- tpDcm + tpDn
 
-  p_matrix["with_drug", "Progressive_disease", "Progressive_disease"] <- 1 - tpDcm - tpDn
+  p_matrix["with_drug",
+           "Progressive_disease", "Progressive_disease"] <- 1 - tpDcm - tpDn
 
   p_matrix["with_drug", "Dead", "Dead"] <- 1
 
