@@ -10,7 +10,7 @@ p_matrix_cycle <- function(p_matrix, age, cycle) {
       "(54,64]" = 0.0138,
       "(64,74]" = 0.0379,
       "(74,84]" = 0.0912,
-      "(84,100]" = 0.01958)
+      "(84,100]" = 0.1958)
   Effect <- 0.5
 
   # matrix containing transition probabilities for without_drug

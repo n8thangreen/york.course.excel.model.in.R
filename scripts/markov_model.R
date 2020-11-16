@@ -14,7 +14,8 @@ s_names  <- c("Asymptomatic_disease", "Progressive_disease", "Dead")
 n_states <- 3 #length(s_names)
 
 # specify number of cycles
-n_cycles <- 44
+# starts at 1 not 0 as in spreadsheet model
+n_cycles <- 46
 
 Initial_age <- 55
 
@@ -26,6 +27,7 @@ uAsymp <- 0.95
 uProg <- 0.75
 oDr <- 0.06
 cDr <- 0.06
+tpDcm <- 0.15
 
 trans_c_matrix <-
   matrix(c(0, 0, cDeath,
@@ -51,9 +53,9 @@ state_q_matrix <-
          dimnames = list(t_names,
                          s_names))
 
-state_q_matrix
-state_c_matrix
-trans_c_matrix
+# state_q_matrix
+# state_c_matrix
+# trans_c_matrix
 
 # transition probabilities
 p_matrix <- array(data = 0,
@@ -61,6 +63,18 @@ p_matrix <- array(data = 0,
                   dimnames = list(t_names,
                                   from = s_names,
                                   to = s_names))
+
+# p_matrix[1, , ]
+
+# only include disease -> death transition cost due to disease
+p_matrix_trans <-
+  matrix(c(0, 0, 0,
+           0, 0, tpDcm,
+           0, 0, 0),
+         byrow = TRUE,
+         nrow = n_states,
+         dimnames = list(s_names,
+                         s_names))
 
 # store population output for each cycle
 
@@ -73,6 +87,8 @@ pop <- array(data = NA,
 pop[, cycle = 1, "Asymptomatic_disease"] <- 1000
 pop[, cycle = 1, "Progressive_disease"] <- 0
 pop[, cycle = 1, "Dead"] <- 0
+
+# head(pop[1, , ])
 
 trans <- array(data = NA,
                dim = c(n_treatments, n_cycles, n_states),
@@ -94,6 +110,7 @@ cycle_empty_array <-
 
 cycle_state_costs <- cycle_trans_costs <- cycle_empty_array
 cycle_costs <- cycle_QALYs <- cycle_empty_array
+LE <- LYs <- cycle_empty_array
 cycle_QALE <- cycle_empty_array
 
 total_costs <- setNames(c(NA, NA), t_names)
@@ -110,37 +127,37 @@ for (i in 1:n_treatments) {
 
     p_matrix <- p_matrix_cycle(p_matrix, age, j - 1)
 
-    p_matrix_trans <- p_matrix[treatment = i, , ]
-
-    # no cost to death from asymptomatic
-    p_matrix_trans["Asymptomatic_disease", "Dead"] <- 0
-    diag(p_matrix_trans) <- 0
-
     # matrix multiplication
     pop[treatment = i, cycle = j, ] <-
       pop[treatment = i, cycle = j - 1, ] %*% p_matrix[treatment = i, , ]
 
     trans[treatment = i, cycle = j, ] <-
-      pop[treatment = i, cycle = j - 1, ] %*% p_matrix_trans[, ]
+      pop[treatment = i, cycle = j - 1, ] %*% p_matrix_trans
 
     age <- age + 1
   }
 
   cycle_state_costs[i, ] <-
-    (pop[treatment = i, , ] %*% state_c_matrix[treatment = i, ]) * 1/(1 + cDr)^(1:n_cycles)
+    (pop[treatment = i, , ] %*% state_c_matrix[treatment = i, ]) * 1/(1 + cDr)^(1:n_cycles - 1)
 
   cycle_trans_costs[i, ] <-
-    (trans[treatment = i, , ] %*% trans_c_matrix[treatment = i, ]) * 1/(1 + cDr)^(1:n_cycles)
+    (trans[treatment = i, , ] %*% trans_c_matrix[treatment = i, ]) * 1/(1 + cDr)^(1:n_cycles - 2)
 
   cycle_costs[i, ] <- cycle_state_costs[i, ] + cycle_trans_costs[i, ]
+
+  LE[i, ] <- pop[treatment = i, , ] %*% c(1,1,0)
+
+  LYs[i, ] <- LE[i, ] * 1/(1 + oDr)^(1:n_cycles - 1)
 
   cycle_QALE[i, ] <-
     pop[treatment = i, , ] %*% state_q_matrix[treatment = i, ]
 
-  cycle_QALYs[i, ] <- cycle_QALE[i, ] * 1/(1 + oDr)^(1:n_cycles)
+  cycle_QALYs[i, ] <- cycle_QALE[i, ] * 1/(1 + oDr)^(1:n_cycles - 1)
 
-  total_costs[i] <- sum(cycle_costs[treatment = i, ])
-  total_QALYs[i] <- sum(cycle_QALYs[treatment = i, ])
+  # include base year (jump at start or end of cycle)?
+
+  total_costs[i] <- sum(cycle_costs[treatment = i, -1])
+  total_QALYs[i] <- sum(cycle_QALYs[treatment = i, -1])
 }
 
 

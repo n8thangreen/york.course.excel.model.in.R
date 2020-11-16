@@ -43,9 +43,16 @@ the following two papers:
 
 The model is made available for non-commercial teaching purposes only.
 
+## Key files
+
+-   `scripts/markov_model.R` - Model set-up, simulation and
+    cost-effectiveness analysis.
+-   `R/p_matrix_cycle.R` - Updates the transition probability matrix at
+    each cycle depending on the cohort ages and cycle number.
+
 ## Code of Conduct
 
-Please note that the york.course.excel.model.in.R project is released
+Please note that the `york.course.excel.model.in.R` project is released
 with a [Contributor Code of
 Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
