@@ -13,7 +13,7 @@ status](https://www.r-pkg.org/badges/version/york.course.excel.model.in.R)](http
 coverage](https://codecov.io/gh/n8thangreen/york.course.excel.model.in.R/branch/master/graph/badge.svg)](https://codecov.io/gh/n8thangreen/york.course.excel.model.in.R?branch=master)
 [![R build
 status](https://github.com/n8thangreen/york.course.excel.model.in.R/workflows/R-CMD-check/badge.svg)](https://github.com/n8thangreen/york.course.excel.model.in.R/actions)
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/n8thangreen/yor.course.excel.model.in.R/master?urlpath=rstudio)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/n8thangreen/york.course.excel.model.in.R/HEAD?urlpath=rstudio)
 <!-- badges: end -->
 
 The package `york.course.excel.model.in.R` is an R implementation of the
