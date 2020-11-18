@@ -13,6 +13,7 @@ status](https://www.r-pkg.org/badges/version/york.course.excel.model.in.R)](http
 coverage](https://codecov.io/gh/n8thangreen/york.course.excel.model.in.R/branch/master/graph/badge.svg)](https://codecov.io/gh/n8thangreen/york.course.excel.model.in.R?branch=master)
 [![R build
 status](https://github.com/n8thangreen/york.course.excel.model.in.R/workflows/R-CMD-check/badge.svg)](https://github.com/n8thangreen/york.course.excel.model.in.R/actions)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/n8thangreen/yor.course.excel.model.in.R/master?urlpath=rstudio)
 <!-- badges: end -->
 
 The package `york.course.excel.model.in.R` is an R implementation of the
@@ -37,7 +38,8 @@ principles of Markov modelling and probabilistic sensitivity analysis in
 the following two papers:
 
 > Briggs A, Sculpher M. Introducing Markov models for economic
-> evaluation. PharmacoEconomics 1998; 13(4): 397-409.  
+> evaluation. PharmacoEconomics 1998; 13(4): 397-409.
+
 > Briggs AH. Handling uncertainty in cost-effectiveness
 > models.PharmacoEconomics 2000 (forthcoming).
 
