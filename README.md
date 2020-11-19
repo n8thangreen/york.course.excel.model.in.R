@@ -41,7 +41,7 @@ the following two papers:
 > evaluation. PharmacoEconomics 1998; 13(4): 397-409.
 
 > Briggs AH. Handling uncertainty in cost-effectiveness
-> models.PharmacoEconomics 2000 (forthcoming).
+> models. PharmacoEconomics 2000 May;17(5):479-500.
 
 The model is made available for non-commercial teaching purposes only.
 
