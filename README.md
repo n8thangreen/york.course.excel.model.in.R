@@ -20,7 +20,8 @@ The package `york.course.excel.model.in.R` is an R implementation of the
 MS Excel Markov model, titled *Markov Modelling and Probabilistic
 Sensitivity Analysis for Cost-Effectiveness Modelling of Health Care
 Interventions* by Andrew Briggs, Health Economics Research Centre,
-University of Oxford.
+University of Oxford, which can be downloaded from
+[here](https://www.york.ac.uk/che/courses/decision-analytic-modelling/).
 
 ## Installation
 
