@@ -9,6 +9,8 @@ library(reshape2)
 library(dplyr)
 
 
+# CohortDrug
+
 plot_drug <-
   melt(pop[2, , ]) %>%
   mutate(state = factor(state,
@@ -18,6 +20,8 @@ ggplot(plot_drug, aes(fill = state, y = value, x = cycle)) +
   geom_bar(position = "fill", stat = "identity", width = 1) +
   scale_x_continuous(breaks = 1:44) +
   ylab("Percentage of cohort")
+
+# COhortNoDrug
 
 plot_free <-
   melt(pop[1, , ]) %>%
@@ -40,7 +44,7 @@ facet_plot <-
   scale_x_continuous(breaks = seq(0, 44, by = 2)) +
   ylab("Percentage of cohort") +
   facet_grid(.~strat) +
-  theme_bw()
+  theme_grey()
 
 facet_plot
 

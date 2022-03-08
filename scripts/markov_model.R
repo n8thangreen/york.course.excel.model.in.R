@@ -18,6 +18,7 @@ n_states <- 3 #length(s_names)
 n_cycles <- 46
 
 Initial_age <- 55
+n_pop <- 1000
 
 cAsymp <- 500
 cDeath <- 1000
@@ -84,7 +85,7 @@ pop <- array(data = NA,
                              cycle = NULL,
                              state = s_names))
 
-pop[, cycle = 1, "Asymptomatic_disease"] <- 1000
+pop[, cycle = 1, "Asymptomatic_disease"] <- n_pop
 pop[, cycle = 1, "Progressive_disease"] <- 0
 pop[, cycle = 1, "Dead"] <- 0
 
@@ -170,14 +171,12 @@ q_incr <- total_QALYs["with_drug"] - total_QALYs["without_drug"]
 # incremental cost effectiveness ratio
 ICER <- c_incr/q_incr
 
-
-plot(x = q_incr, y = c_incr,
-     # xlim = c(0,30),
-     xlim = c(0,1100),
-     ylim = c(0, 10e6),
+plot(x = q_incr/n_pop, y = c_incr/n_pop,
+     xlim = c(0, 1100/n_pop),
+     ylim = c(0, 10e6/n_pop),
      pch = 16, cex = 1.5,
      xlab = "QALY differential",
      ylab = "Cost differential (£)",
      frame.plot = FALSE)
-abline(a = 0, b = 30000) #wtp
+abline(a = 0, b = 30000)  # willingness-to-pay
 
